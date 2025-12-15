@@ -6,7 +6,7 @@ import emailjs from '@emailjs/browser';
 // ============================================
 const EMAILJS_PUBLIC_KEY = 'JtSGl3EemoEkQszcw';
 const EMAILJS_SERVICE_ID = 'service_dv9kkvq';
-const EMAILJS_TEMPLATE_ID = 'template_ql3l0yp';
+const EMAILJS_TEMPLATE_ID = 'template_vez5k59';
 const RECIPIENT_EMAIL = 'ohnotriplesix@gmail.com';
 // ============================================
 
