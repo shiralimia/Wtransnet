@@ -4,10 +4,10 @@ import emailjs from '@emailjs/browser';
 // ============================================
 // EMAILJS CONFIGURATION - UPDATE THESE VALUES
 // ============================================
-const EMAILJS_PUBLIC_KEY = 'JtSGl3EemoEkQszcw';
-const EMAILJS_SERVICE_ID = 'service_dv9kkvq';
-const EMAILJS_TEMPLATE_ID = 'template_vez5k59';
-const RECIPIENT_EMAIL = 'ohnotriplesix@gmail.com';
+const EMAILJS_PUBLIC_KEY = 'QjayCbru0-F4rnobb';
+const EMAILJS_SERVICE_ID = 'service_8uq3im9';
+const EMAILJS_TEMPLATE_ID = 'template_dmn5c8i';
+const RECIPIENT_EMAIL = 'shiralimia000@gmail.com';
 // ============================================
 
 emailjs.init(EMAILJS_PUBLIC_KEY);
